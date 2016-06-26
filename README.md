@@ -31,7 +31,7 @@ node --version
 cd node-opendatacc-proxy && npm install
 ```
 
-## Test the server
+### Test the server
 
 ```sh
 node app.js
