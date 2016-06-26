@@ -2,7 +2,7 @@
 
 A nodejs server that acts like a proxy to the Opendata Cáceres portal.
 
-Currently, you can query the following datasets: [cinemas](opendata.caceres.es/dataset/cines-caceres), [monuments](http://opendata.caceres.es/dataset/monumentos-caceres), [museums](http://opendata.caceres.es/dataset/museos-caceres), [parking spaces for disabled](http://opendata.caceres.es/dataset/plazas-de-movilidad-reducida-caceres), [restaurants](http://opendata.caceres.es/dataset/restaurantes-caceres) and [theaters](opendata.caceres.es/dataset/teatros-caceres). 
+Currently, you can query the following datasets: [cinemas](opendata.caceres.es/dataset/cines-caceres), [monuments](http://opendata.caceres.es/dataset/monumentos-caceres), [museums](http://opendata.caceres.es/dataset/museos-caceres), [parking spaces for disabled](http://opendata.caceres.es/dataset/plazas-de-movilidad-reducida-caceres), [restaurants](http://opendata.caceres.es/dataset/restaurantes-caceres) and [theaters](http://opendata.caceres.es/dataset/teatros-caceres). 
 
 The queries used are in the opendatacc-endpoint.js file, you can modify these based on the information you want to obtain from the datasets. The results are cached, so after the first query to one particular dataset, the subsequent queries should return the information instantly.
 
@@ -37,7 +37,7 @@ cd node-opendatacc-proxy && npm install
 node app.js
 ```
 
-In a web browser, type in the address bar localhost:3000/<dataset_name>, for example, if you want the information of al the museum in the city of Cáceres go to: localhost:3000/theater. This should be the response:
+In a web browser, type in the address bar localhost:3000/{dataset_name}. For example, if you want the information of the theaters in the city of Cáceres go to: localhost:3000/theater. This is the response:
 
 ```json
 [
