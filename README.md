@@ -8,7 +8,7 @@ The queries used are in the opendatacc-endpoint.js file, you can modify these ba
 
 ## Demo
 
-![](https://lh3.googleusercontent.com/T7IAUdQGIh3UkETz9Ng4A3stH6H308kw-lBGxXl43k12jSm4RJi3WYAKWRU2rNYMOqf9Ov42l-MRH8_7-8TcTUYrKdmwMkqGbDMYoxMhyqchq8MZoIj-ndc2kOmeZ7DbJJHflumxOwxbC8JFor4B3tfMYx2rFRTIcgZ8UbYvocceQn8nA_cIQ_SkpIDvugUOiXUA4SxGhnXuJD0XZBH2-81jC7W5CJ5CG0Rt1sLktqRAp-3mg_vttBEe059O9Pjcgqw9zmGPZYGRo2BZWcVT9lLSF05sIdbudb-0O-jmKJZCZdanndeTKII5XmyL6B1az1v2ULwue5vfwcH64TpdkhSYykr9duix9vN13-cHfscmtvSxMEW6z8aOb-rVTcDieoynCZuLCFsKP3e1L7Z_qEkTXem9yz6RmAPN36aFPAxIZFg4w2xKyuHqtG_785jpIrZX3p3L60IJr-UUk5ovvlpB6xqavnhxcAMeAcPh1oTNtgh3d5v4_2-9hCoFUL3LGPGv7-S2NFb-Jcn_gR50maiNTT-BQI1OnD8IOVazSjV4w-fJEeMHvuHXpDzTysSJ1LBULgyWkiVOlsd0q_c3RqZFKYZV9jE=w297-h480-no)
+![](https://dl.dropboxusercontent.com/s/cufh1r1n17zsx81/node-api-opendata_demo.gif)
 
 
 ## Run the server locally
