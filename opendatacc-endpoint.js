@@ -1,21 +1,27 @@
 // Teatros
-//var teatrosQuery = 'select ?nombre ?lat ?long ?tieneEnlaceSIG where {?uri a om:Teatro. ?uri rdfs:label ?nombre.?uri geo:lat ?lat.?uri geo:long ?long OPTIONAL{?uri om:tieneEnlaceSIG ?tieneEnlaceSIG.}}'
-
 var teatrosQuery = 'select ?nombre ?lat ?long ?tieneEnlaceSIG where {?uri a om:Teatro. ?uri rdfs:label ?nombre.?uri geo:lat ?lat.?uri geo:long ?long OPTIONAL{?uri om:tieneEnlaceSIG ?tieneEnlaceSIG.}'
 // Cines
 var cinesQuery = 'select ?nombre ?lat ?long ?tieneEnlaceSIG where{?uri a om:Cine. ?uri rdfs:label ?nombre.?uri geo:lat ?lat.?uri geo:long ?long OPTIONAL{?uri om:tieneEnlaceSIG ?tieneEnlaceSIG.}'
-
 // Monumentos
 var monumentosQuery = 'select ?nombre ?lat ?long ?tieneEnlaceSIG ?enlacedbpedia where { ?uri a om:Monumento. ?uri rdfs:label ?nombre.?uri geo:lat ?lat.?uri geo:long ?long OPTIONAL{?uri om:tieneEnlaceSIG ?tieneEnlaceSIG} OPTIONAL{?uri owl:sameAs ?enlacedbpedia.}'
-
 // Museos
 var museosQuery = 'select ?nombre ?lat ?long ?tieneEnlaceSIG ?descripcion ?enlacedbpedia where {?uri a om:Museo. ?uri rdfs:label ?nombre.?uri geo:lat ?lat.?uri geo:long ?long OPTIONAL{?uri om:tieneEnlaceSIG ?tieneEnlaceSIG} OPTIONAL{?uri owl:sameAs ?enlacedbpedia} OPTIONAL{?uri schema:description ?descripcion.}'
-
 // PlazaMovilidadReducida
 var movilidadQuery = 'select ?uri ?lat ?long ?tieneEnlaceSIG ?descripcion where {?uri a om:PlazaMovilidadReducida. ?uri rdfs:label ?nombre.?uri geo:lat ?lat.?uri geo:long ?long OPTIONAL{?uri om:tieneEnlaceSIG ?tieneEnlaceSIG} OPTIONAL{?uri rdfs:comment ?descripcion.}'
-
 // Bares restaurantes y cafes
 var cafeRestauranteBarQuery = 'select ?nombre ?lat ?long where {{?uri a om:BarCopas. ?uri rdfs:label ?nombre.?uri geo:lat ?lat.?uri geo:long ?long.} union {?uri a om:CafeBar. ?uri rdfs:label ?nombre.?uri geo:lat ?lat.?uri geo:long ?long.} union{?uri a om:Restaurante. ?uri rdfs:label ?nombre.?uri geo:lat ?lat.?uri geo:long ?long.}'
+
+
+var monumentosNewQuery = 'select ?nombre ?lat ?long ?tieneEnlaceSIG where{?uri a om:Monumento. ?uri rdfs:label ?nombre.?uri geo:lat ?lat.?uri geo:long ?long.?uri om:tieneEnlaceSIG ?tieneEnlaceSIG.}'
+
+var museosNewQuery = 'select ?nombre ?lat ?long ?tieneEnlaceSIG where{?uri a om:Museo. ?uri rdfs:label ?nombre.?uri geo:lat ?lat.?uri geo:long ?long.?uri om:tieneEnlaceSIG ?tieneEnlaceSIG.}'
+
+var viasQuery = 'select ?nombre ?lat ?long ?tieneEnlaceSIG where{?uri a om:Via. ?uri om:nombreVia ?nombre.?uri om:puntoMedioVia ?uri2.?uri2 geo:lat ?lat.?uri2 geo:long ?long.?uri om:tieneEnlaceSIG ?tieneEnlaceSIG.}'
+
+var casaCulturaQuery = 'select ?nombre ?lat ?long ?tieneEnlaceSIG where{?uri a om:CasaCultura. ?uri rdfs:label ?nombre.?uri geo:lat ?lat.?uri geo:long ?long.?uri om:tieneEnlaceSIG ?tieneEnlaceSIG.}'
+
+var centrosReligiososQuery = 'select ?nombre ?lat ?long ?tieneEnlaceSIG where{?uri a om:CentroReligioso. ?uri rdfs:label ?nombre.?uri geo:lat ?lat.?uri geo:long ?long.?uri om:tieneEnlaceSIG ?tieneEnlaceSIG.}'
+
 
 /*
  * We have to:
@@ -93,7 +99,7 @@ module.exports = {
 
             // Final callback function
             function(err, results) {
-                allDoneCallback(results);
+                allDoneCallback(results[0]);
             }
         );
 
@@ -124,6 +130,21 @@ function getDataFromEndpoint(whichDataset, dataObtainedCallback) {
             break;
         case 'cinema':
             SPARQLquery = cinesQuery+'}';
+            break;
+        case 'monumento':
+            SPARQLquery= monumentosNewQuery;
+            break;
+        case 'via':
+            SPARQLquery = viasQuery;
+            break;
+    case 'casaCultura':
+            SPARQLquery = casaCulturaQuery;
+            break;
+        case 'museo':
+            SPARQLquery = museosNewQuery;
+            break;
+        case 'centroReligioso':
+            SPARQLquery = centrosReligiososQuery;
             break;
         default:
             break;
@@ -160,7 +181,7 @@ function getDataFromEndpointById(whichDataset, id, dataObtainedCallback) {
             SPARQLquery = monumentosQuery + 'filter(regex(?uri,"/'+id+'_"))}';
             break;
         case 'museum':
-            SPARQLquery = museosQuery + 'filter(regex(?uri,"/'+id+'_"))}';
+            SPARQLquery = museosQuery + 'filter(regex(?uri,"/'+id+'-"))}';
             break;
         case 'restaurant':
             SPARQLquery = cafeRestauranteBarQuery + 'filter(regex(?uri,"/'+id+'_"))}';
