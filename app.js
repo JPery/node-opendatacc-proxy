@@ -17,6 +17,13 @@ app.use(function(req, res, next) {
 
 var router = express.Router();
 
+router.route('/:dataset/:id')
+    .all(function(request, response, next) {
+        opendatacc.getDataCaceresById(request.params.dataset, request.params.id, function(data) {
+            return response.json(data);
+        });
+    });
+
 router.route('/:dataset')
     .all(function(request, response, next) {
         opendatacc.getDataCaceres(request.params.dataset, function(data) {
