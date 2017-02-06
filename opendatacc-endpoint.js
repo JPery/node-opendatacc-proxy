@@ -27,7 +27,7 @@ var centrosReligiososQuery = 'select ?nombre ?lat ?long ?tieneEnlaceSIG where{?u
  * We have to:
  	1. Get all the information of the selected dataset with a query to the SPARQL endpoint of opendata Cáceres
  	2. For every element of the dataset, get an image from it's 'enlaceSIG'
- 		2.1. We add the image as a property of the place (place.image). 
+ 		2.1. We add the image as a property of the place (place.image).
  			If no image was found, this property is undefined.
    Both calls are asynchronous, and first call must finish before second call is performed
  */
@@ -80,7 +80,7 @@ module.exports = {
         );
 
     },
-    
+
         getDataCaceresById: function(whichDataset, id, allDoneCallback) {
         async.waterfall(
             [
@@ -104,7 +104,7 @@ module.exports = {
         );
 
     }
-    
+
 };
 
 
@@ -167,7 +167,7 @@ function getDataFromEndpoint(whichDataset, dataObtainedCallback) {
                 }
             });
 
-    } else { // return empty object if bad dataset was selected. 
+    } else { // return empty object if bad dataset was selected.
         dataObtainedCallback([]);
     }
 }
@@ -216,7 +216,7 @@ function getDataFromEndpointById(whichDataset, id, dataObtainedCallback) {
                 }
             });
 
-    } else { // return empty object if bad dataset was selected. 
+    } else { // return empty object if bad dataset was selected.
         dataObtainedCallback([]);
     }
 }
@@ -248,21 +248,23 @@ function addImageToBindings(bindings, allImagesObtainedCallback) {
 
 function fetchImageFromSIGLink(sigLink, callback) {
 
-    var pattern = new RegExp('\/fotosOriginales\/toponimia\/');
+    var pattern = new RegExp('\/fotosOriginales\/TOPONIMIA\/');
 
     request(sigLink, function(err, resp, body) {
 
         $ = cheerio.load(body);
         images = $('img'); // jquery get all imgs
-
-        var placeImage;
+        var placeImage = [];
         for (var i = 0; i < images.length; i++) {
             var imageSrc = $(images[i]).attr('src');
             if (pattern.test(imageSrc)) {
-                placeImage = 'http://sig2.caceres.es' + imageSrc;
-                break;
+                placeImage.push('http://sig.caceres.es' + imageSrc);
             }
         }
-        callback(placeImage);
+        callback(placeImage[getRandomInt(0,placeImage.length-1)]);
     });
+}
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
